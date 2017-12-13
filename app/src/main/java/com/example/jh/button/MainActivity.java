@@ -1,32 +1,64 @@
 package com.example.jh.button;
 
+import android.app.Service;
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.Toast;
+import android.widget.ToggleButton;
+
+import com.example.jh.button.vibrate.VibrateActivity;
+import com.example.jh.button.voice.VoiceActivity;
 
 /**
  * Android 防止过快点击造成多次事件执行（防止按钮重复点击）
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button btn;
+    private SoundPool sp; //声明一个SoundPool
+    private int music; //定义一个整型用load（）；来设置suondID
 
-    private SoundPool sp;//声明一个SoundPool
-    private int music;//定义一个整型用load（）；来设置suondID
 
+    private Button bt, bt_vibrate, btn, styleBt, musicBt ;
+    private ToggleButton toggleButton;
+
+    private Vibrator mVibrator;  //声明一个振动器对象
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btn = (Button) findViewById(R.id.btn);
+        /**
+         * 想设置震动大小可以通过改变pattern来设定，如果开启时间太短，震动效果可能感觉不到
+         */
+        mVibrator = (Vibrator) getApplication().getSystemService(Service.VIBRATOR_SERVICE);
 
+        init();
+        initListener();
+        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    Toast.makeText(MainActivity.this, "被选中", Toast.LENGTH_SHORT).show();
+                    /**
+                     * 四个参数就是——停止 开启 停止 开启
+                     * -1不重复，非-1为从pattern的指定下标开始重复
+                     */
+                    mVibrator.vibrate(new long[]{1000, 10000, 1000, 10000}, -1);
+                    //停止1秒，开启震动10秒，然后又停止1秒，又开启震动10秒，不重复.
+                }else {
+                    Toast.makeText(MainActivity.this, "未被选中", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         // 方式1
 //        btn.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -46,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button styleBt = (Button)findViewById(R.id.style_button_id);
+
         styleBt.setBackgroundColor(Color.parseColor("#b9e3d9"));
 
         styleBt.setOnTouchListener(new View.OnTouchListener() {
@@ -67,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
         sp= new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);//第一个参数为同时播放数据流的最大个数，第二数据流类型，第三为声音质量
         music = sp.load(this, R.raw.delete,1); //把你的声音素材放到res/raw里，第2个参数即为资源文件，第3个为音乐的优先级
 
-        Button musicBt = (Button)findViewById(R.id.music_button_id);
         musicBt.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -77,8 +108,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
+    private void initListener() {
+        bt.setOnClickListener(this);
+        bt_vibrate.setOnClickListener(this);
+    }
+
+    private void init() {
+        bt = (Button) findViewById(R.id.bt);
+        bt_vibrate = (Button) findViewById(R.id.bt_vibrate);
+        btn = (Button) findViewById(R.id.btn);
+        toggleButton = (ToggleButton) findViewById(R.id.toggleButton);
+        styleBt = (Button)findViewById(R.id.style_button_id);
+        musicBt = (Button)findViewById(R.id.music_button_id);
+    }
 
 
     /**当用户点击按钮时，Android系统调用buttonListener(View)方法。
@@ -94,11 +139,31 @@ public class MainActivity extends AppCompatActivity {
             case R.id.my_button_id:
                 Toast.makeText(this, "button自己绑定一个触发函数", Toast.LENGTH_SHORT).show();
                 break;
-
             default:
                 break;
         }
     }
 
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mVibrator.cancel();
+    }
+
+    Intent intent;
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.bt:
+                intent = new Intent(MainActivity.this, VoiceActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.bt_vibrate:
+                intent = new Intent(MainActivity.this, VibrateActivity.class);
+                startActivity(intent);
+                break;
+        }
+
+    }
 }

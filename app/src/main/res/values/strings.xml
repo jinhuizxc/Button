@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Button</string>
+    <string name="str_ok">开启震动</string>
+    <string name="str_end">取消震动</string>
 </resources>

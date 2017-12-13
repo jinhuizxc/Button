@@ -8,6 +8,18 @@
     tools:context="com.example.jh.button.MainActivity">
 
     <Button
+        android:id="@+id/bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="进入声音控制界面"/>
+    <Button
+        android:id="@+id/bt_vibrate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="进入震动控制界面"/>
+    <Button
         android:id="@+id/btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,13 +38,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Button自己绑定点击事件"
-        android:layout_marginTop="16dp"
         android:onClick="buttonListener"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp"
         android:background="@drawable/button_selector"
         android:text="自定义按钮样式" />
 
@@ -41,7 +51,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp"
         android:text="用代码动态设定点击样式" />
 
     <Button
@@ -49,7 +58,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/shape"
-        android:layout_marginTop="16dp"
         android:text="用shape画的圆角按钮" />
 
     <Button
@@ -57,15 +65,22 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/style_selector"
-        android:layout_marginTop="16dp"
         android:text="用selector设计的按钮样式" />
 
     <Button
         android:id="@+id/music_button_id"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="有音效的按钮" />
 
+    <ToggleButton
+        android:id="@+id/toggleButton"
+        android:layout_width="43dp"
+        android:layout_height="23dp"
+        android:layout_gravity="center"
+        android:checked="true"
+        android:background="@drawable/togglebutton_style"
+        android:textOff=""
+        android:textOn="" />
 </LinearLayout>
