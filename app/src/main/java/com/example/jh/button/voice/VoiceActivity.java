@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -51,6 +52,8 @@ public class VoiceActivity extends AppCompatActivity implements View.OnClickList
     Button button1, button2, button3, button4, button5, button6;
     // 铃声音量
     int ringerVolume = 20;
+    //震动
+    private Vibrator vibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +61,7 @@ public class VoiceActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_voice);
 
         audio = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
-
+        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);//获取系统震动服务
 
         button1 = (Button) findViewById(R.id.button1);
         button2 = (Button) findViewById(R.id.button2);
@@ -114,6 +117,8 @@ public class VoiceActivity extends AppCompatActivity implements View.OnClickList
                 vibrate_setting = AudioManager.VIBRATE_SETTING_ON;
                 ring_mode = 1;
                 audio.setRingerMode(ring_mode);
+                // 调节震动
+                vibrator.vibrate(500);
                 break;
             case R.id.button4: //一律不振动
                 vibrate_setting = AudioManager.VIBRATE_SETTING_OFF;

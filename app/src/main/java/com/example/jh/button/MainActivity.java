@@ -1,6 +1,7 @@
 package com.example.jh.button;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ToggleButton toggleButton;
 
     private Vibrator mVibrator;  //声明一个振动器对象
+    AudioManager audio;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          * 想设置震动大小可以通过改变pattern来设定，如果开启时间太短，震动效果可能感觉不到
          */
         mVibrator = (Vibrator) getApplication().getSystemService(Service.VIBRATOR_SERVICE);
+        audio = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
+
 
         init();
         initListener();
@@ -48,14 +53,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     Toast.makeText(MainActivity.this, "被选中", Toast.LENGTH_SHORT).show();
-                    /**
-                     * 四个参数就是——停止 开启 停止 开启
-                     * -1不重复，非-1为从pattern的指定下标开始重复
-                     */
-                    mVibrator.vibrate(new long[]{1000, 10000, 1000, 10000}, -1);
-                    //停止1秒，开启震动10秒，然后又停止1秒，又开启震动10秒，不重复.
+                    mVibrator.cancel();
+
+                    audio.setRingerMode(AudioManager.RINGER_MODE_NORMAL);  // 响铃正常状态
+//                    audio.setRingerMode(AudioManager.VIBRATE_SETTING_OFF); // 设置不振动
                 }else {
                     Toast.makeText(MainActivity.this, "未被选中", Toast.LENGTH_SHORT).show();
+//                    /**
+//                     * 四个参数就是——停止 开启 停止 开启
+//                     * -1不重复，非-1为从pattern的指定下标开始重复
+//                     */
+//                    mVibrator.vibrate(new long[]{1000, 10000, 1000, 10000}, -1);
+//                    //停止1秒，开启震动10秒，然后又停止1秒，又开启震动10秒，不重复.
+
+                    // 调节至震动
+                    audio.setRingerMode(AudioManager.VIBRATE_SETTING_ON);
+                    // 调节震动
+                    mVibrator.vibrate(500);
                 }
             }
         });
