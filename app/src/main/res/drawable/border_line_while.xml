@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:useLevel="false">
+
+
+    <!--边框样式，给你的View加上边框-->
+    <solid android:color="@null" />
+    <padding
+        android:bottom="1dip"
+        android:left="1dip"
+        android:right="1dip" />
+
+    <stroke
+        android:width="2dip"
+        android:color="@color/theme_red" />
+    <!--边框宽度-->
+    <size
+        android:width="10dip"
+        android:height="10dip" />
+    <!--边框-->
+
+
+</shape>

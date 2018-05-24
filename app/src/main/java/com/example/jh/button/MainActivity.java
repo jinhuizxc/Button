@@ -16,6 +16,7 @@ import android.widget.CompoundButton;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.example.jh.button.style.ButtonStyleActivity;
 import com.example.jh.button.vibrate.VibrateActivity;
 import com.example.jh.button.voice.VoiceActivity;
 
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int music; //定义一个整型用load（）；来设置suondID
 
 
-    private Button bt, bt_vibrate, btn, styleBt, musicBt ;
+    private Button bt, bt_vibrate, btn, styleBt, musicBt, bt_style ;
     private ToggleButton toggleButton;
 
     private Vibrator mVibrator;  //声明一个振动器对象
@@ -128,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initListener() {
         bt.setOnClickListener(this);
         bt_vibrate.setOnClickListener(this);
+        bt_style.setOnClickListener(this);
     }
 
     private void init() {
@@ -137,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toggleButton = (ToggleButton) findViewById(R.id.toggleButton);
         styleBt = (Button)findViewById(R.id.style_button_id);
         musicBt = (Button)findViewById(R.id.music_button_id);
+        bt_style = (Button) findViewById(R.id.bt_style);
     }
 
 
@@ -176,6 +179,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bt_vibrate:
                 intent = new Intent(MainActivity.this, VibrateActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.bt_style:
+                intent = new Intent(this, ButtonStyleActivity.class);
                 break;
         }
 

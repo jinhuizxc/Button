@@ -24,6 +24,8 @@
 
         <activity android:name=".voice.VoiceActivity"/>
         <activity android:name=".vibrate.VibrateActivity"/>
+        <activity android:name=".style.ButtonStyleActivity"/>
+
     </application>
 
 </manifest>
