@@ -182,6 +182,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt_style:
                 intent = new Intent(this, ButtonStyleActivity.class);
+                startActivity(intent);
                 break;
         }
 

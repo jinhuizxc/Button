@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/button1"
@@ -25,14 +26,54 @@
         android:text="带边框颜色的button" />
 
     <Button
-        android:id="@+id/button4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/btn_nor_down"
         android:text="带点击状态的button" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_bottom_confirm_bg"
+        android:text="带点击圆角状态的button" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/hint_superscript_red"
+        android:text="原形数字提醒" />
     <Button
         android:id="@+id/button5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:background="@drawable/circle_shape"
+        android:text="透明按钮圆角" />
+
+    <!--请求网络数据等待框-->
+    <ProgressBar
+        android:layout_width="50dip"
+        android:layout_height="50dip"
+        android:layout_marginLeft="20dp"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/progresstyle"
+        android:indeterminateTintMode="src_in"/>
+
+    <!--进度条-->
+    <ProgressBar
+        android:id="@+id/my_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+        android:max="10"
+        android:progress="3"
+        android:progressDrawable="@drawable/progressbar_color"/>
+
+    <!--底部线条EditText-->
+    <EditText
+        android:text="底部线条EditText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/edit_for_line_bg" />
+
 </LinearLayout>
